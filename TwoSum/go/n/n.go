@@ -4,20 +4,21 @@ func twoSum(nums []int, target int) []int {
 	count := len(nums)
 
 	// value: index
-	m := make(map[int]int)
+	memory := make(map[int]int)
 
 	for i := 0; i < count; i++ {
 		num := nums[i]
 
-		goal := target - num
+		complement := target - num
 
-		saved, ok := m[goal]
+		seen, ok := memory[complement]
 
 		if ok {
-			return []int{saved, i}
+			return []int{seen, i}
 		}
 
-		m[num] = i
+		// add to memory after to dedupe
+		memory[num] = i
 	}
 	return []int{}
 }
