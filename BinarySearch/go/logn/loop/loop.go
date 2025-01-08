@@ -11,28 +11,23 @@ func search(nums []int, target int) int {
 	start := 0
 	end := l - 1
 
-	return binary(nums, start, end, target)
-}
+	for {
+		if start > end {
+			return -1
+		}
 
-func binary(nums []int, start, end, target int) int {
+		mid := ((end - start) / 2) + start
 
-	if start > end {
-		return -1
+		if nums[mid] == target {
+			return mid
+		}
+		if nums[mid] < target {
+			start = mid + 1
+		}
+		if nums[mid] > target {
+			end = mid - 1
+		}
 	}
-
-	mid := ((end - start) / 2) + start
-	el := nums[mid]
-
-	if el == target {
-		return mid
-	}
-	if el < target {
-		return binary(nums, mid+1, end, target)
-	}
-	if el > target {
-		return binary(nums, start, mid-1, target)
-	}
-	return -1
 }
 
 func main() {
