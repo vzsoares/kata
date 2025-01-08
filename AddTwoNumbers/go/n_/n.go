@@ -15,33 +15,27 @@ type ListNode struct {
 
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
 
-	el1 := l1
-	el2 := l2
-	extra := 0
-
 	tail := &ListNode{}
 	head := tail
+
+	extra := 0
 
 	for {
 
 		s := tail.Val
-		if el1 != nil {
-			s = s + el1.Val
-			el1 = el1.Next
+		if l1 != nil {
+			s = s + l1.Val
+			l1 = l1.Next
 		}
-		if el2 != nil {
-			s = s + el2.Val
-			el2 = el2.Next
-		}
-
-		if s > 9 {
-			tail.Val = s % 10
-			extra = 1
-		} else {
-			tail.Val = s
+		if l2 != nil {
+			s = s + l2.Val
+			l2 = l2.Next
 		}
 
-		if el1 == nil && el2 == nil {
+		tail.Val = s % 10
+		extra = s / 10
+
+		if l1 == nil && l2 == nil {
 			if extra > 0 {
 				tmp := &ListNode{}
 				tmp.Val = extra
