@@ -20,17 +20,21 @@ func search(nums []int, target int) int {
 	println("pivot", pivot)
 	lo := 0
 	hi := l - 1
+	m := 0
+	rm := 0
 	for lo <= hi {
-		m := (hi + lo) / 2
-		rm := (m + pivot) % l
+		m = (hi + lo) / 2
+		rm = (m + pivot) % l
 
-		if nums[rm] == target {
-			return rm
-		} else if nums[rm] > target {
-			hi = m - 1
-		} else {
+		if nums[rm] <= target {
 			lo = m + 1
+		} else {
+			hi = m - 1
 		}
+	}
+
+	if nums[rm] == target {
+		return rm
 	}
 
 	return -1
