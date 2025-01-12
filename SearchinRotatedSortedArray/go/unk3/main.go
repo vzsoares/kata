@@ -1,59 +1,39 @@
 package main
 
-// https://leetcode.com/problems/search-in-rotated-sorted-array/description/
 func search(nums []int, target int) int {
-	//find lesser value as it means the pivot position
-	pivot := findLesserValueIndex(nums)
-	// println("pivot", pivot)
-	//search value and consider the pivot
 	l := len(nums)
 
-	hi := l - 1
-	lo := 0
+	start := 0
+	end := l - 1
 
-	mid := 0
-	realMid := 0
+	for start <= end {
+		mid := ((end - start) / 2) + start
 
-	for lo <= hi {
-		mid = lo + ((hi - lo) / 2)
-		realMid = (mid + pivot) % l
-
-		if nums[realMid] == target {
-			return realMid
-		} else if nums[realMid] < target {
-			lo = mid + 1
+		if nums[end] <= nums[mid] {
+			start = mid + 1
 		} else {
-			hi = mid - 1
+			end = mid
 		}
-	}
 
-	if nums[realMid] == target {
-		return realMid
+	}
+	pivot := start - 1
+	// println("pivot", pivot)
+	lo := 0
+	hi := l - 1
+	for lo <= hi {
+		m := (hi + lo) / 2
+		rm := (m + pivot) % l
+
+		if nums[rm] == target {
+			return rm
+		} else if nums[rm] > target {
+			hi = m - 1
+		} else {
+			lo = m + 1
+		}
 	}
 
 	return -1
-}
-
-func findLesserValueIndex(nums []int) int {
-	l := len(nums)
-
-	hi := l - 1
-	lo := 0
-
-	mid := 0
-
-	for lo <= hi {
-
-		mid = ((hi - lo) / 2) + lo
-
-		if nums[hi] <= nums[mid] {
-			lo = mid + 1
-		} else {
-			hi = mid
-		}
-	}
-
-	return mid
 }
 
 func main() {
