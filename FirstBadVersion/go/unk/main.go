@@ -28,10 +28,7 @@ func firstBadVersion(n int, check func(int) bool) int {
 }
 
 func isBadVersion(n, v int) bool {
-	if n >= v {
-		return true
-	}
-	return false
+	return n >= v
 }
 
 func getBadVersionFn(v int) func(n int) bool {
