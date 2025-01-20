@@ -23,17 +23,17 @@ func search(nums []int, target int) int {
 	m := 0
 	rm := 0
 	for lo <= hi {
-		m = (hi + lo) / 2
+		m = ((hi - lo) / 2) + lo
 		rm = (m + pivot) % l
 
-		if nums[rm] > target {
-			hi = m - 1
-		} else {
+		if nums[rm] < target {
 			lo = m + 1
+		} else {
+			hi = m - 1
 		}
 	}
-	m = (hi + lo) / 2
-	rm = (m + pivot) % l
+
+	rm = (lo + pivot) % l
 	if nums[rm] == target {
 		return rm
 	}
