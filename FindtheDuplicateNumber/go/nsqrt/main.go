@@ -5,6 +5,15 @@ import "fmt"
 // https://leetcode.com/problems/find-the-duplicate-number/
 
 func findDuplicate(nums []int) int {
+	l := len(nums)
+
+	for i := 0; i < l; i++ {
+		for j := i + 1; j < l; j++ {
+			if nums[i] == nums[j] {
+				return nums[i]
+			}
+		}
+	}
 
 	return -1
 }
