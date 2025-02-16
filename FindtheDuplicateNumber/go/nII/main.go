@@ -3,6 +3,7 @@ package main
 import "fmt"
 
 // https://leetcode.com/problems/find-the-duplicate-number/
+// https://www.youtube.com/watch?v=wjYnzkAhcNk
 
 // ### nums.length == n + 1 ###
 // ### nums[n] in [1, n]    ###
