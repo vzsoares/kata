@@ -7,18 +7,21 @@ class Solution(object):
         :type word: str
         :rtype: bool
         """
+        # edge case for one letter words
         length = len(word)
         if length <= 1:
             return True
 
         for i, c in enumerate(word):
+            # make a new word without char i
             newWord = word[:i] + word[i + 1 :]
 
+            # calculate char frequency
             m = {}
-
             for j, c2 in enumerate(newWord):
                 m[c2] = m.get(c2, 0) + 1
 
+            # check if all chars have same frequency
             values = m.values()
             prev = list(values)[0]
             failed = False
