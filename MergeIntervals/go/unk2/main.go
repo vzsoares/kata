@@ -24,7 +24,7 @@ func merge(intervals [][]int) [][]int {
 func recurse(arr [][]int, idx int) [][]int {
 
 	if idx+1 > len(arr)-1 {
-		return arr
+		return arr[:]
 	}
 
 	curr := arr[idx]
@@ -33,8 +33,18 @@ func recurse(arr [][]int, idx int) [][]int {
 	//can merge
 	if curr[1] >= next[0] {
 		// merge and keep idx
-		result := append(arr[:max(idx-1, 0)], []int{curr[0], next[1]})
-		result = append(result, arr[min(idx+2, len(arr)-1):]...)
+		first := max(idx-1, 0)
+
+		result := arr
+		if first == 0 {
+			result = [][]int{{curr[0], next[1]}}
+		} else {
+			result = append(arr[:first], []int{curr[0], next[1]})
+		}
+		last := min(idx+2, len(arr)-1)
+		if len(arr) > 2 {
+			result = append(result, arr[last:]...)
+		}
 		recurse(result, idx)
 	} else {
 		// idx ++
