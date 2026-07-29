@@ -45,13 +45,11 @@ func recurse(arr [][]int, idx int) [][]int {
 		if len(arr) > 2 {
 			result = append(result, arr[last:]...)
 		}
-		recurse(result, idx)
+		return recurse(result, idx)
 	} else {
 		// idx ++
 		return recurse(arr, idx+1)
 	}
-
-	return arr
 }
 
 func main() {
