@@ -36,21 +36,15 @@ func recurse(arr [][]int, idx int) [][]int {
 	//can merge
 	if curr[1] >= next[0] {
 		// merge and keep idx
-		first := max(idx-1, 1)
+		result := make([][]int, 0, len(arr)-1)
+		// start -> idx non inclusive
+		result = append(result, arr[:idx]...)
+		// new merged item
+		result = append(result, []int{curr[0], max(next[1], curr[1])})
+		// rest of items, from merget to end
+		result = append(result, arr[idx+2:]...)
 
-		result := make([][]int, len(arr))
-		copy(result, arr)
-
-		if idx == 0 {
-			result = [][]int{{curr[0], max(next[1], curr[1])}}
-		} else {
-			result = append(arr[:first], []int{curr[0], max(next[1], curr[1])})
-		}
-		last := min(idx+2, len(arr)-1)
-		if len(arr) > 2 {
-			result = append(result, arr[last:]...)
-		}
-		return recurse(arr, idx)
+		return recurse(result, idx)
 	} else {
 		// idx ++
 		return recurse(arr, idx+1)
