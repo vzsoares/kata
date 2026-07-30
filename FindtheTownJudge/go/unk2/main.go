@@ -7,6 +7,7 @@ import (
 func findJudge(n int, trust [][]int) int {
 	// the player score needs to be n-1 for him to be the judge
 	// arr of scores, idx being the player pos
+	// sum scores for winner and if he trusts someone then he CANNOT be the judge
 	// for [1,3],[2,3],[3,1] then [-1, 0, 0 ]; no score 1 then -1
 	// for [1,3],[2,3] then [-1, -1, 2]; score 2(n-1) then 3(player)
 	// sum score and find judge
@@ -18,7 +19,7 @@ func findJudge(n int, trust [][]int) int {
 	scores := make([]int, n+1)
 
 	for _, pair := range trust {
-		scores[pair[0]]--
+		scores[pair[0]] = -67 // this is just to disqualify that player
 		scores[pair[1]]++
 	}
 
